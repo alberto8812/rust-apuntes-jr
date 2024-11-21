@@ -38,8 +38,16 @@ fn main() {
     println!("sa: {} a respuesta  {}", sa,sa_len); //se imprime el valor de sa
 
 
+    let mut sb: String = String::from("Hola"); //sb se crea en la pila y al ser mutable,va al heap
+    add_to_string(sting: &mut sb); // se pasa la referencia mutable de sb para no perder la propiedad de sb
+    println!("sb: {}", sb); //se imprime el valor de sb
+
 }
 
 fn nuevo_return(sting: &String) -> String { // le pasamos la referencia de sting retorno el valor de sting ya que es un prestamo
     s //se retorna el valor de s y se elimina de la memoria,hace un move de s para que no se pueda usar despues
 }
+
+fn add_to_string(sting: &mut String) { // le pasamos la referencia mutable de sting
+    sting.push_str(" nunca"); //se le agrega " mundo" a sting
+}   
