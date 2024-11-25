@@ -1,23 +1,53 @@
+#[derive(Debug)]
+struct Suscriptor {
+    es_iteligente: bool,
+    nombre: String,
+    beautifull: bool,
+}
+struct RGBColor(i32, i32, i32);
+
+fn se_suscribe(nombre: String) -> Suscriptor {
+    Suscriptor {
+        es_iteligente: true,
+        nombre,
+        beautifull: true,
+    }
+}
+
+impl Suscriptor {
+    fn se_desuscribe(&mut self, nuevo_nombre: String) {
+        self.nombre = nuevo_nombre;
+        self.es_iteligente = false;
+        self.beautifull = false;
+    }
+
+    fn new_subscriber(nombre: String) -> Suscriptor {
+        Suscriptor {
+            es_iteligente: true,
+            nombre,
+            beautifull: true,
+        }
+    }
+}
+
 fn main() {
-    let mut name: String = String::new(); //se crea un string vacio en el heap
-    println!("Ingrese su nombre: ");
-    std::io::stdin().read_line(&mut name).unwrap(); //se lee el nombre ingresado por el usuario y se almacena en name
-                                                    //unwrap() maneja el error que se puede producir al leer la entrada del usuario
-                                                    //stdin() es una funcion que lee la entrada del usuario
-                                                    //read_line() es una funcion que lee la entrada del usuario y la almacena en un string
-                                                    //io es un modulo que contiene funciones para manejar la entrada y salida de datos
-                                                    //std es un modulo que contiene funciones estandar
-                                                    //buf es un buffer que almacena la entrada del usuario
+    let suscriptor: Suscriptor = se_suscribe(String::from("Juan"));
 
-    let name_len: usize = calcular_longitud(&name); //se calcula la longitud de name y se almacena en name_len
-    add_to_string(&mut name); //se le agrega " mundo" a name que sigue siendo dueño del valor
-    println!("Hola, {}! Tu nombre tiene {} letras", name, name_len); //se imprime el nombre y la longitud del nombre
-}
+    let mut segund_test: Suscriptor = Suscriptor {
+        nombre: String::from("Pedro"),
+        ..suscriptor
+    };
 
-fn add_to_string(s: &mut String) {
-    s.push_str(" mundo"); //se le agrega " mundo" a s
-}
+    segund_test.se_desuscribe(String::from("Pedro"));
+    let hola = Suscriptor::new_subscriber(String::from("Juan")); // se puede llamar a un metodo de la estructura sin instanciarla , ya que es un metodo asociado
 
-fn calcular_longitud(s: &String) -> usize {
-    s.len() //se retorna la longitud de string
+    println!(
+        "El suscriptor {} es inteligente? {}",
+        suscriptor.nombre, suscriptor.es_iteligente
+    );
+    println!(
+        "El suscriptor {} es hermoso? {}",
+        suscriptor.nombre, suscriptor.beautifull
+    );
+    let color: RGBColor = RGBColor(255, 0, 0);
 }
