@@ -1,4 +1,15 @@
 #[derive(Debug)]
+
+pub enum Vehiculo {
+    Auto(Vehiculo2),
+    Moto(Vehiculo2),
+    Camion(Vehiculo2),
+}
+struct Vehiculo2 {
+    marca: String,
+    modelo: String,
+    anio: i32,
+}
 struct Suscriptor {
     es_iteligente: bool,
     nombre: String,
@@ -30,6 +41,14 @@ impl Suscriptor {
     }
 }
 
+//custom lifetime
+struct user<'a> {
+    name: &'a str,
+    email: &'a str,
+    sign_in_count: u64,
+    active: bool,
+}
+
 fn main() {
     let suscriptor: Suscriptor = se_suscribe(String::from("Juan"));
 
@@ -50,4 +69,11 @@ fn main() {
         suscriptor.nombre, suscriptor.beautifull
     );
     let color: RGBColor = RGBColor(255, 0, 0);
+
+    let fav_num: Option<i8> = Some(27);
+
+    match fav_num {
+        Some(val) => println!("Es mi numero favorito"),
+        _ => println!("No es mi numero favorito"),
+    }
 }
